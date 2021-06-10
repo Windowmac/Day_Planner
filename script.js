@@ -3,7 +3,17 @@ const weekDay = moment(moment(), 'dddd');
 document.getElementById('currentDay').textContent = weekDay;
 document.getElementById('currentDay').classList.add('time-block');
 
-const workTimes = [9, 10, 11, 12, 1, 2, 3, 4, 5];
+const workTimes = [
+  '9:00am',
+  '10:00am',
+  '11:00am',
+  '12:00pm',
+  '1:00pm',
+  '2:00pm',
+  '3:00pm',
+  '4:00pm',
+  '5:00pm',
+];
 const workLength = workTimes.length;
 let timeCount = 0;
 
@@ -17,7 +27,7 @@ function createCalendar(times) {
   const timerEl = document.createElement('div');
   timerEl.classList.add('col-2', 'align-self-center', 'text-end');
   const time = times.shift();
-  timerEl.textContent = `${time}:00`;
+  timerEl.textContent = time;
   liEl.appendChild(timerEl);
 
   const memoEl = document.createElement('textarea');
@@ -82,13 +92,18 @@ function createCalendar(times) {
   handleColor();
 
   function handleColor() {
-    const currentTime = moment(moment(), 'h');
-    const calendarTime = moment(time, 'h');
+    const currentTime = moment(moment(), 'h:mma');
+    const calendarTime = moment(time, 'h:mma');
+    const currentHour = moment(moment(), 'h');
+    const calendarHour = moment(time, 'h');
+
     if (calendarTime.isBefore(currentTime)) {
       memoEl.classList.add('past');
-    } else if (calendarTime.isAfter(currentTime)) {
+    }
+    if (calendarTime.isAfter(currentTime)) {
       memoEl.classList.add('future');
-    } else {
+    }
+    if (calendarHour.isSame(currentHour)) {
       memoEl.classList.add('present');
     }
   }
