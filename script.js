@@ -94,10 +94,6 @@ function createCalendar(times) {
   function handleColor() {
     const currentTime = moment(moment(), 'h:mma');
     const calendarTime = moment(time, 'h:mma');
-    const currentHour = moment(moment(), 'h');
-    const calendarHour = moment(time, 'h');
-    console.log(calendarHour);
-    console.log(currentHour);
 
     if (calendarTime.isBefore(currentTime)) {
       memoEl.classList.add('past');
