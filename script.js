@@ -96,6 +96,8 @@ function createCalendar(times) {
     const calendarTime = moment(time, 'h:mma');
     const currentHour = moment(moment(), 'h');
     const calendarHour = moment(time, 'h');
+    console.log(calendarHour);
+    console.log(currentHour);
 
     if (calendarTime.isBefore(currentTime)) {
       memoEl.classList.add('past');
@@ -103,7 +105,7 @@ function createCalendar(times) {
     if (calendarTime.isAfter(currentTime)) {
       memoEl.classList.add('future');
     }
-    if (calendarHour.isSame(currentHour)) {
+    if (calendarTime.isSame(currentTime, 'hour')) {
       memoEl.classList.add('present');
     }
   }
